@@ -11,9 +11,12 @@ package bankOperationsManagement.controller;
 // Actual code starts here...
 import java.sql.SQLException;
 
+
 import java.util.Scanner;
 
-import bankOperationsManagement.connections.BankConnections;
+import bankOperationsManagement.services.BankConnections;
+
+
 
 public class OperationsMain {
 

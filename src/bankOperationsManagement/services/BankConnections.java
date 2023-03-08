@@ -1,4 +1,4 @@
-package bankOperationsManagement.connections;
+package bankOperationsManagement.services;
 
 
 /*
@@ -16,32 +16,35 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import bankOperationsManagement.connections.DatabaseConnection;
+import bankOperationsManagement.interfaces.IBankOperatipons;
 
 
-class DatabaseConnection
-{
-	 private static final String URL = "jdbc:mysql://localhost:3306/bank_management_system";
-	    private static final String USERNAME = "root";
-	    private static final String PASSWORD = "babayaga@12345";
 
-	    private static Connection connection;
-
-	    private DatabaseConnection() {}
-
-	    public static Connection getConnection() throws SQLException {
-	        if (connection == null || connection.isClosed()) {
-	            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-	        }
-	        return connection;
-	    }
-}
-public class BankConnections {
+//class DatabaseConnection
+//{
+//	 private static final String URL = "jdbc:mysql://localhost:3306/bank_management_system";
+//	    private static final String USERNAME = "root";
+//	    private static final String PASSWORD = "babayaga@12345";
+//
+//	    private static Connection connection;
+//
+//	    private DatabaseConnection() {}
+//
+//	    public static Connection getConnection() throws SQLException {
+//	        if (connection == null || connection.isClosed()) {
+//	            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+//	        }
+//	        return connection;
+//	    }
+//}
+public class BankConnections implements IBankOperatipons {
 
 
 	static int balance=0;
 	static Scanner SCANNER = new  Scanner(System.in);
 
-	public static void showUserDetails() throws ClassNotFoundException, SQLException
+	public void showUserDetails() throws ClassNotFoundException, SQLException
 	{
 		Connection connection = DatabaseConnection.getConnection();//singleton Pattern
 		Statement statement = connection.createStatement();
@@ -65,7 +68,7 @@ public class BankConnections {
 			System.out.println("Customer Phone: " + customerPhone);
 		}
 	}
-	public static void showAccountDetails() throws ClassNotFoundException, SQLException
+	public void showAccountDetails() throws ClassNotFoundException, SQLException
 	{
 		Connection connection = DatabaseConnection.getConnection();//singleton Pattern
 		Statement statement = connection.createStatement();
@@ -91,7 +94,7 @@ public class BankConnections {
 		}
 	}
 
-	public static void deposit() throws SQLException, ClassNotFoundException {
+	public void deposit() throws SQLException, ClassNotFoundException {
 		System.out.println("Enter account Number: ");
 		String accountNo = SCANNER.next();
 
@@ -126,7 +129,7 @@ public class BankConnections {
 		statement.close();
 		connection.close();
 	}
-	public static void withdraw() throws SQLException, ClassNotFoundException {
+	public void withdraw() throws SQLException, ClassNotFoundException {
 		System.out.println("Enter Account Number: ");
 		String accountNo = SCANNER.next();
 		Connection connection = DatabaseConnection.getConnection();//singleton Pattern
